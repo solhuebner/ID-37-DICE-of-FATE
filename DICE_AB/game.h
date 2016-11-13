@@ -3,7 +3,7 @@
 
 #include "globals.h"
 
-#define AMOUNT_OF_DICE_TYPE             6
+#define AMOUNT_OF_DICE_TYPE             8
 #define AMOUNT_OF_ROLLING_DICE          5
 
 byte currentDice;
@@ -17,7 +17,7 @@ boolean slidingDice;
 boolean goBack;
 boolean showDiceName;
 boolean showResult;
-byte diceMax[] = {2, 5, 7, 9, 13, 21};
+byte diceMax[] = {2, 5, 7, 9, 11, 13, 21, 99};
 byte bandPositionX[] = {0, 8, 16, 24, 32, 56, 54, 56};
 byte frameBand = 0;
 byte diceResult;
@@ -122,7 +122,7 @@ void stateMenuPlay()
 
 void stateDiceTypeAndAmount()
 {
-  if (currentDice < 2) amountOfDice = 1;
+  if (currentDice < 2 || currentDice > 7) amountOfDice = 1;
   for (byte i = 0; i < AMOUNT_OF_DICE_TYPE; i++)
   {
     sprites.drawSelfMasked(rollingDice[i].x , rollingDice[i].y, allDice, 3 * rollingDice[i].type + frameDice);
@@ -141,6 +141,7 @@ void stateDiceTypeAndAmount()
   {
     slidingDice = true;
     slideLeft = false;
+    if (currentDice > 7) amountOfDice = 2;
     currentDice--;
     for (byte i = 0; i < AMOUNT_OF_DICE_TYPE; i++) rollingDice[i].y = 7;
     showDiceName = false;
@@ -209,12 +210,12 @@ void stateDiceTypeAndAmount()
   drawNumbers(60, 50, amountOfDice);
   sprites.drawSelfMasked(1, 53, allButtons, 2 * BUTTON_A + buttonPressed[BUTTON_A]);
   sprites.drawSelfMasked(97, 53, allButtons, 2 * BUTTON_B + buttonPressed[BUTTON_B]);
-  if (currentDice > 1) sprites.drawSelfMasked(66, 48, allButtons, 2 * BUTTON_UP + buttonPressed[BUTTON_UP]);
-  if (currentDice > 1) sprites.drawSelfMasked(66, 55, allButtons, 2 * BUTTON_DOWN + buttonPressed[BUTTON_DOWN]);
+  if (currentDice > 1 && currentDice < 8) sprites.drawSelfMasked(66, 48, allButtons, 2 * BUTTON_UP + buttonPressed[BUTTON_UP]);
+  if (currentDice > 1 && currentDice < 8) sprites.drawSelfMasked(66, 55, allButtons, 2 * BUTTON_DOWN + buttonPressed[BUTTON_DOWN]);
   sprites.drawSelfMasked(12, 56, allWords, 0);
   if (currentDice > 1) sprites.drawSelfMasked(108, 56, allWords, 1);
   else sprites.drawSelfMasked(108, 56, allWords, 3);
-  if (showDiceName)sprites.drawSelfMasked(56, 40, diceName, currentDice - 1);
+  if (showDiceName)sprites.drawSelfMasked(55, 40, diceName, currentDice - 1);
 }
 
 void stateDiceRolling()
@@ -237,7 +238,8 @@ void stateDiceRolling()
   {
     for (byte i = 0; i < AMOUNT_OF_ROLLING_DICE; i++)
     {
-      rollingDice[i].result = random (1, diceMax[currentDice - 1]);
+      if (rollingDice[0].type < 7) rollingDice[i].result = random (1, diceMax[currentDice - 1]);
+      else rollingDice[i].result = random (0, diceMax[currentDice - 1]);
     }
     sprites.drawSelfMasked(rollingDice[0].x, rollingDice[0].y, allDice, 3 * rollingDice[0].type + frameDice);
   }

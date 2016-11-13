@@ -49,8 +49,7 @@ void updateSlidingMenu(byte amount)
 
 void stateMenuIntro()
 {
-  for (byte i = 0; i < 4; i++) sprites.drawSelfMasked(32 * i, 10, TEAMarg, i);
-  sprites.drawSelfMasked(43, 50, TEAM_argPart5, 0);
+  sprites.drawSelfMasked(34, 4, T_arg, 0);
   globalCounter++;
   if (globalCounter > 180)
   {
@@ -109,7 +108,7 @@ void stateMenuHelp()
 void stateMenuInfo()
 {
   titleScreen();
-  for (byte i = 0; i < 2; i++) sprites.drawSelfMasked(i*64, 36, infoScreen, i);
+  for (byte i = 0; i < 2; i++) sprites.drawSelfMasked(i * 64, 36, infoScreen, i);
   if (arduboy.justPressed(A_BUTTON | B_BUTTON)) gameState = STATE_MENU_MAIN;
 }
 
