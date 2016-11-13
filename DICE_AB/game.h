@@ -108,7 +108,7 @@ void drawResult()
 
 void stateMenuPlay()
 {
-  currentDice = 3;
+  currentDice = 4;
   placeDice();
   slideLeft = true;
   slidingDice = false;
@@ -147,13 +147,13 @@ void stateDiceTypeAndAmount()
     showDiceName = false;
     arduboy.audio.tone(300, 20);
   }
-  if (arduboy.justPressed(UP_BUTTON) && (amountOfDice < AMOUNT_OF_ROLLING_DICE) && (currentDice > 1))
+  if (arduboy.justPressed(UP_BUTTON) && (amountOfDice < AMOUNT_OF_ROLLING_DICE) && (currentDice > 1) && (currentDice < 8))
   {
     buttonPressed[BUTTON_UP] = true;
     amountOfDice++;
     arduboy.audio.tone(600, 20);
   }
-  if (arduboy.justPressed(DOWN_BUTTON) && (amountOfDice > 1) && (currentDice > 1))
+  if (arduboy.justPressed(DOWN_BUTTON) && (amountOfDice > 1) && (currentDice > 1) && (currentDice < 8))
   {
     buttonPressed[BUTTON_DOWN] = true;
     amountOfDice--;
