@@ -123,9 +123,10 @@ void stateMenuPlay()
 void stateDiceTypeAndAmount()
 {
   if (currentDice < 2 || currentDice > 7) amountOfDice = 1;
-  for (byte i = 0; i < AMOUNT_OF_DICE_TYPE; i++)
+  sprites.drawSelfMasked(rollingDice[0].x, rollingDice[0].y, justCoin, 0);
+  for (byte i = 1; i < AMOUNT_OF_DICE_TYPE; i++)
   {
-    sprites.drawSelfMasked(rollingDice[i].x , rollingDice[i].y, allDice, 3 * rollingDice[i].type + frameDice);
+    sprites.drawSelfMasked(rollingDice[i].x , rollingDice[i].y, allDice, (3 * (rollingDice[i].type -1)) + frameDice);
   }
   if (arduboy.justPressed(RIGHT_BUTTON) && !slidingDice && (currentDice < AMOUNT_OF_DICE_TYPE))
   {
@@ -241,7 +242,7 @@ void stateDiceRolling()
       if (rollingDice[0].type < 7) rollingDice[i].result = random (1, diceMax[currentDice - 1]);
       else rollingDice[i].result = random (0, diceMax[currentDice - 1]);
     }
-    sprites.drawSelfMasked(rollingDice[0].x, rollingDice[0].y, allDice, 3 * rollingDice[0].type + frameDice);
+    sprites.drawSelfMasked(rollingDice[0].x, rollingDice[0].y, allDice, (3 * (rollingDice[0].type -1)) + frameDice);
   }
   else
   {
