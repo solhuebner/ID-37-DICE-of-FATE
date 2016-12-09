@@ -1,7 +1,8 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#include "Arglib.h"
+#include <Arduboy2.h>
+#include <ArduboyTones.h>
 #include "bitmaps.h"
 
 //define menu states (on main menu)
@@ -22,8 +23,9 @@
 #define BUTTON_UP                    2
 #define BUTTON_DOWN                  3
 
-Arduboy arduboy;
-Sprites sprites(arduboy);
+Arduboy2Base arduboy;
+Sprites sprites;
+ArduboyTones sound(arduboy.audio.enabled);
 
 byte gameState = STATE_MENU_INTRO;   // start the game with the TEAM a.r.g. logo
 byte menuSelection = STATE_MENU_PLAY; // PLAY menu item is pre-selected
