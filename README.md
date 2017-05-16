@@ -1,6 +1,5 @@
-#DICE of FATE
-![Image]
-(http://www.team-arg.org/masterfiles/team-arg-dice/images/banner-ID-37.png)
+# DICE of FATE
+![Image](http://www.team-arg.org/masterfiles/team-arg-dice/images/banner-ID-37.png)
 
 Digital Dice : http://www.team-arg.org/dice-manual.html  
 **Download latest Arduboy version and source :** https://github.com/TEAMarg/ID-37-DICE-of-FATE/releases/latest  
